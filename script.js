@@ -220,7 +220,7 @@ function show_slider() {
     document.getElementById("score").innerHTML = a.value;
 }
 
-setInterval(show_slider, 200);
+setInterval(show_slider, 50);
 
 function next_q() {
 
