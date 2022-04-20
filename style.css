@@ -30,7 +30,8 @@ body {
 }
 
 .q_frame,
-#a_frame {
+#a_frame,
+#a_frame_desc {
     background: #fff;
     border-radius: 20px;
     width: 50%;
@@ -102,18 +103,26 @@ body {
 
 
 
-#a_frame {
+#a_frame,
+#a_frame_desc {
   opacity: 0;
   flex-flow: row;
-  gap: 10px;
+  gap: 5px;
   width: 55%;
   transition: 500ms ease-in-out;
 }
 
+#final_char_0,
 #final_char_1,
-#final_char_2,
-#final_char_3 {
-  opacity: 0;
+#final_char_2 {
+  width: 128px;
+  height: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: right;
+  text-align: center;
+  flex-flow: column;
+  gap: 6px;
 }
 
 #final_char_name_0,
@@ -124,13 +133,33 @@ body {
   background-color: #632196;
   width: 128px;
   height: 28px;
-  display: flex;
-  justify-content: center;
-  align-items: right;
-  text-align: center;
-
 }
 
+#final_char_desc_0,
+#final_char_desc_1,
+#final_char_desc_2 {
+  background: #333;
+  border-radius: 10px;
+  width: 80%;
+  height: 600px;
+  color: white;
+  font-size: 20px;
+  text-align: justify;
+  padding: 12px;
+  padding-top: 12px;
+}
+
+
+#final_char_desc_container {
+  margin-top: -20px;
+  display: flex;
+  flex-flow: row;
+  width: 1200px;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+}
 /* Thanks to cssportal.com for this handy input range styling */
 
 input[type=range] {
