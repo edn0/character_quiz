@@ -34,10 +34,11 @@ body {
 #a_frame_desc {
     background: #fff;
     border-radius: 20px;
-    width: 50%;
+    width: 60%;
     height: 100%;
     margin: 20px;
     padding: 50px;
+    box-shadow:  2px 2px 8px rgba(9, 0, 0, 0.416);
 
     display: flex;
     align-items: center;
@@ -91,6 +92,7 @@ body {
   color: white;
   font-size: 18px;
   transition: 200ms ease-in-out;
+  box-shadow:  2px 2px 8px rgba(9, 0, 0, 0.29);
 }
 
 #button:hover {
@@ -110,6 +112,10 @@ body {
   gap: 5px;
   width: 55%;
   transition: 500ms ease-in-out;
+}
+
+#a_frame_desc {
+  width: 70%;
 }
 
 #final_char_0,
@@ -133,6 +139,8 @@ body {
   background-color: #632196;
   width: 128px;
   height: 28px;
+  box-shadow:  2px 2px 8px rgba(9, 0, 0, 0.29);
+
 }
 
 #final_char_desc_0,
@@ -147,6 +155,8 @@ body {
   text-align: justify;
   padding: 12px;
   padding-top: 12px;
+  box-shadow:  2px 2px 8px rgba(9, 0, 0, 0.29);
+
 }
 
 
