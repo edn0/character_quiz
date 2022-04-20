@@ -29,7 +29,8 @@ body {
     height: 80%;
 }
 
-.q_frame {
+.q_frame,
+#a_frame {
     background: #fff;
     border-radius: 20px;
     width: 50%;
@@ -39,6 +40,7 @@ body {
 
     display: flex;
     align-items: center;
+    justify-content: center;
     flex-flow: column;
 }
 
@@ -96,6 +98,37 @@ body {
 
 #button:active {
   opacity: 0.5;
+}
+
+
+
+#a_frame {
+  opacity: 0;
+  flex-flow: row;
+  gap: 10px;
+  width: 55%;
+  transition: 500ms ease-in-out;
+}
+
+#final_char_1,
+#final_char_2,
+#final_char_3 {
+  opacity: 0;
+}
+
+#final_char_name_0,
+#final_char_name_1,
+#final_char_name_2 {
+  color: white;
+  font-size: 20px;
+  background-color: #632196;
+  width: 128px;
+  height: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: right;
+  text-align: center;
+
 }
 
 /* Thanks to cssportal.com for this handy input range styling */

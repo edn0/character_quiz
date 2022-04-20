@@ -128,11 +128,30 @@ class Answer {
 
 function diff(a,b){return Math.abs(a-b);}
 
+let final_characters = [];
+let final_score = [];
 function compute_result() {
-    for (let i=1; i < player_answers.length; i++) {
-        console.log("// Final");
-        console.table(characters);
+    console.log("// Final");
+
+    for (let i=0; i < characters.length; i++) {
+        if (characters[i].match_score > 3) {
+            final_characters.push(characters[i]);
+        }
     }
+    
+    document.getElementById("a_frame").style.opacity = 1;
+
+    for (let i=0; i < final_characters.length; i++) {
+
+        document.getElementById("final_char_img")
+
+        document.getElementById("final_char_img_" + i).src = "img/" + final_characters[i].character_ID + ".jpg";
+        document.getElementById("final_char_name_" + i).innerHTML = final_characters[i].character_name;
+    }
+
+
+    console.table(final_characters);
+
 }
 
 let t = [];
@@ -155,13 +174,13 @@ function compare_answer(player_answer, q_number) {
     let matching_char = t[0];
 
     let matching_char_name = matching_char[1].character_name
-    console.table(t);
-    console.log(matching_char);
 
+    let matching_char_num = matching_char[1].character_ID
+
+    console.log(matching_char_num + " // ID")
     console.log("Answer matches with " + matching_char_name);
 
     let score_up_ID = matching_char[1].character_ID;
-    console.log(score_up_ID + "// ID");
 
     characters[score_up_ID].match_score = characters[score_up_ID].match_score + 1;
 
@@ -208,6 +227,8 @@ function submit() {
     if (q_number == 20) {
         document.getElementById("button").value = "FINISHED";
         document.getElementById("score").style.opacity = 0;
+        document.getElementById("attribute_0").style.opacity = 0;
+        document.getElementById("attribute_1").style.opacity = 0;
         document.getElementById("question").innerHTML = "Here is your result :";
         document.getElementById("slider").style.opacity = 0;
 
@@ -224,7 +245,6 @@ function submit() {
         let player_answer = new Answer(q_number, answer_value, "Player");
         compare_answer(player_answer, q_number);
     }
-    console.table(player_answers);
 
 
     next_q();
