@@ -92,7 +92,7 @@ let characters_name = [
     "Ascal Vetag",
     "Carenna Zakog",
     "Iris Valentine",
-    "Beain Sinclair",
+    "Beau Sinclair",
     "Omra Danann",
     "Monique Dancer"
 ]
@@ -156,6 +156,7 @@ function compute_result() {
     
     document.getElementById("a_frame").style.opacity = 1;
     document.getElementById("a_frame_desc").style.opacity = 1;
+    document.getElementById("q_frame").style.height = "50%";
 
 
     for (let i=0; i < final_characters.length; i++) {
