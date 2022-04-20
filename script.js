@@ -86,14 +86,22 @@ let characters_name = [
 let character_answers = [
     [45,25,5,80,5,60,10,0,20,10,95,55,55,15,100,15,10,10,65,55], // Katlynn
     [75,55,70,75,70,15,80,95,0,80,45,85,20,10,20,55,95,80,5,100], // Elise
-
+    [80,95,45,25,65,70,75,55,95,15,70,35,45,5,45,10,80,70,15,35], // Charlie
+    [5,0,20,100,0,80,40,10,5,45,90,80,95,100,60,45,5,5,95,80], // Vamir
+    [65,85,0,30,75,20,60,35,65,100,85,0,5,0,95,0,0,95,20,20], // Ascal
+    [15,10,10,40,35,90,45,30,10,55,100,40,80,75,55,35,15,15,55,60], // Carenna
+    [85,60,60,60,100,30,65,75,60,65,55,45,10,45,35,40,90,100,0,95], // Iris
+    [30,75,15,5,60,95,20,5,85,5,40,5,60,55,80,20,20,55,80,45], // Beau
+    [10,65,0,65,10,25,35,15,15,20,75,30,85,20,90,25,25,45,45,85], // Omra
+    [45,100,55,0,55,100,0,15,100,0,25,100,70,25,5,5,30,0,10,0] // Monique
 ]
 
 class Character {
-    constructor(character_ID, character_name, answers) {
+    constructor(character_ID, character_name, answers, match_score) {
         this.character_ID = character_ID;
         this.character_name = character_name;
         this.answers = answers;
+        this.match_score = match_score;
     }
 }
 
@@ -122,23 +130,45 @@ function diff(a,b){return Math.abs(a-b);}
 
 function compute_result() {
     for (let i=1; i < player_answers.length; i++) {
-        // pour chaque perso
-            //pour chaque reponse 1
+        console.log("// Final");
+        console.table(characters);
     }
 }
 
+let t = [];
+
+
 let difference = []; // This list will contain the difference between the player's answer and every character's answer
-function compare_answer(player_answer) {
 
-    for (let i=0; i < player_answers.length; i++) {
 
-        let d = diff(player_answer.answer_value, characters[i].answer[q_number]);
-        console.log(d);
-        difference.push(d);
+function compare_answer(player_answer, q_number) {
+
+
+    for (let i=0; i < characters.length; i++) {
+        let d = diff(player_answer.answer_value, characters[i].answers[q_number -1]);
+        difference = [ [d] , characters[i]]; // difference and character_ID
+        t.push(difference);
 
     }
+    
+    t.sort();
+    let matching_char = t[0];
 
-    console.log(difference)
+    let matching_char_name = matching_char[1].character_name
+    console.table(t);
+    console.log(matching_char);
+
+    console.log("Answer matches with " + matching_char_name);
+
+    let score_up_ID = matching_char[1].character_ID;
+    console.log(score_up_ID + "// ID");
+
+    characters[score_up_ID].match_score = characters[score_up_ID].match_score + 1;
+
+    difference = [];
+    t = [];
+
+
 }
 
 function show_slider() {
@@ -148,17 +178,31 @@ function show_slider() {
 
 setInterval(show_slider, 200);
 
+function next_q() {
 
+    document.getElementById("question").innerHTML = questions[q_number];
+    document.getElementById("attribute_0").innerHTML = attribute_left[q_number];
+    document.getElementById("attribute_1").innerHTML = attribute_right[q_number];
+    q_number = q_number+1;
+}
 
+let game_started = false;
 function submit() {
 
-    if (q_number <= 0) { // Creates character objects at the start of the game
+    if (q_number <= 0 && game_started == false) { // Creates character objects at the start of the game
 
         for (let i=0; i < characters_name.length; i++) {
-            let c = new Character(i, characters_name[i], character_answers[i]);
+            let c = new Character(i, characters_name[i], character_answers[i], 0);
             characters.push(c);
+            game_started = true;
         }
-        console.log(characters);
+
+          // For the first click (acting as a start btn)
+        document.getElementById("score").style.opacity = 1;
+        document.getElementById("question").style.opacity = 1;
+        document.getElementById("slider").style.opacity = 1;
+
+        document.getElementById("button").value = "SUBMIT";
     }
 
     if (q_number == 20) {
@@ -171,31 +215,19 @@ function submit() {
         return;
     }
 
-
     let answer_value = document.getElementById("slider").value;
 
-    document.getElementById("score").innerHTML = answer_value;
 
-    console.log(answer_value);
-    if (q_number > 0) {
+    if (q_number >= 1) {
         player_answers.push(answer_value);
+
+        let player_answer = new Answer(q_number, answer_value, "Player");
+        compare_answer(player_answer, q_number);
     }
     console.table(player_answers);
 
-    document.getElementById("question").innerHTML = questions[q_number];
-    document.getElementById("attribute_0").innerHTML = attribute_left[q_number];
-    document.getElementById("attribute_1").innerHTML = attribute_right[q_number];
 
-    // For the first click (acting as a start btn)
-    document.getElementById("score").style.opacity = 1;
-    document.getElementById("question").style.opacity = 1;
-    document.getElementById("slider").style.opacity = 1;
-
-    document.getElementById("button").value = "SUBMIT";
-    q_number = q_number+1;
-    
-    let player_answer = new Answer(q_number, answer_value, "Player");
-    compare_answer(player_answer);
+    next_q();
 
 
 }
