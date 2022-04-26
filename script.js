@@ -155,19 +155,23 @@ function compute_result() {
     
     document.getElementById("a_frame").style.opacity = 1;
     document.getElementById("a_frame_desc").style.opacity = 1;
-    document.getElementById("q_frame").style.height = "60px";
+    // Reduce size of elements to reuse q_frame as greet for final message 
+    document.getElementById("q_frame").style.height = "30px";
+    document.getElementById("score").style.height = "0px";
+    document.getElementById("attribute_0").style.height = "0px";
+    document.getElementById("attribute_1").style.height = "0px";
+
+
 
 
     for (let i=0; i < final_characters.length; i++) {
-
-        document.getElementById("final_char_img")
 
         document.getElementById("final_char_img_" + i).src = "img/" + final_characters[i].character_ID + ".jpg";
         document.getElementById("final_char_name_" + i).innerHTML = final_characters[i].character_name;
         document.getElementById("final_char_desc_" + i).innerHTML = final_characters[i].character_description
         document.getElementById("final_char_" + i).style.opacity = 1;
         document.getElementById("final_char_desc_" + i).style.opacity = 1;
-        document.getElementById("final_char_" + i).style.width = "128px";
+        document.getElementById("final_char_" + i).style.width = "100px";
     }
 
     document.getElementById("a_frame_desc").style.opacity = 1;
